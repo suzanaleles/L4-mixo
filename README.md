@@ -36,6 +36,7 @@ Now obtain the latest (developers') version of the GOTM code:
     git clone git@github.com:gotm-model/code.git <GOTMDIR>
     cd <GOTMDIR>
     git checkout 1cd920
+    git submodule update --init --recursive
 
 (Replace `<GOTMDIR>` with the directory where the GOTM code should go, e.g., ~/gotm.)
 
@@ -49,7 +50,7 @@ In addition to the source code (see previous section), you will need:
 To build the model executable, you will need to create a build directory, call cmake to generate makefiles, then call make to compile and install. For instance:
 
     mkdir -p ~/build/gotm && cd ~/build/gotm
-    cmake <GOTMDIR>/src -DFABM_BASE=<FABMDIR> -DFABM_ERSEM_BASE=<ERSEMDIR>
+    cmake <GOTMDIR> -DFABM_BASE=<FABMDIR> -DFABM_ERSEM_BASE=<ERSEMDIR>
     make install
 
 In the above, replace `<GOTMDIR>` with the directory with the GOTM source code, e.g., ~/gotm if you executed `git clone` in you home directory. Also, replace `<FABMDIR>` with the directory with the FABM code, e.g., ~/fabm and `<ERSEMDIR>` with the directory with the ERSEM code, e.g., ~/ersem.
