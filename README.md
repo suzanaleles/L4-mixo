@@ -1,57 +1,59 @@
 # L4 model set up 
 
-Model set up to explore the dynamics of different protist trophic strategies (autotrophy, mixotrophy, and heterotrophy) at L4 station in the Western English Channel. The protist model is implemented through the Framework for Aquatic Biogeochemical Models (FABM). The Fortran code requires external dependencies from the European Regional Seas Ecosystem Model (ERSEM) and the L4 physical set up is simulated through the General Ocean Turbulence Model (GOTM).
+This is a water column model setup designed to explore the dynamics of different protist trophic strategies (autotrophy, mixotrophy, and heterotrophy) at the [L4 station in the Western English Channel](https://westernchannelobservatory.org.uk). The protist model is implemented in the [Framework for Aquatic Biogeochemical Models (FABM)](http://fabm.net) and further depends on the [European Regional Seas Ecosystem Model (ERSEM)](http://ersem.com). The simulation of 1D hydrodynamics and transport is handled by the [General Ocean Turbulence Model (GOTM)](https://gotm.net/).
 
-The protist model is a development of previous works (Flynn & Mitra 2009 J Plankton Res, Mitra et al. 2016 Protist)  
-and is described in full in Leles et al 2018 J Plankton Res. 
+The protist model is a development of previous works ([Flynn & Mitra 2009 J Plankton Res](https://doi.org/10.1093/plankt/fbp044), [Mitra et al. 2016 Protist](https://doi.org/10.1016/j.protis.2016.01.003))
+and is described in full in [Leles et al 2018 J Plankton Res](https://doi.org/10.1093/plankt/fby044). 
 
-## Obtaining the code and building 
+## Obtaining the source code
 
 ### FABM
 
 First obtain the FABM source code:
 
-    git clone git://git.code.sf.net/p/fabm/code <FABMDIR>
+    git clone git@github.com:fabm-model/fabm.git <FABMDIR>
 
-(Replace `<FABMDIR>` with the directory with the FABM code, e.g., ~/fabm-git.)
+(Replace `<FABMDIR>` with the directory where the FABM code should go, e.g., ~/fabm.)
 
-### ERSEM + FABM
+### ERSEM
 
-Obtain the ERSEM code for FABM:
+First [register for access to the ERSEM source code](https://www.pml.ac.uk/Modelling_at_PML/Code_Registration).
+
+After you receive an e-mail indicating that access to ERSEM was granted, obtain the source code:
 
     git clone git@gitlab.ecosystem-modelling.pml.ac.uk:stable/ersem.git <ERSEMDIR>
 
-(Replace `<ERSEMDIR>` with the directory with the ERSEM code, e.g., ~/ersem-git.) Note that for this to work, you have to provide [the PML GitLab server](https://gitlab.ecosystem-modelling.pml.ac.uk/profile/keys) with your public SSH key. ERSEM can be obtained upon registration at the [Shelf Seas Modelling Programme](http://www.shelfseasmodelling.org).
+(Replace `<ERSEMDIR>` with the directory where the ERSEM code shoulf go, e.g., ~/ersem.)
 
-FABM and ERSEM use object-oriented Fortran and therefore require a recent Fortran compiler, such as Intel Fortran 12.1 or higher and gfortran 4.7 or higher. Compilation is regularly tested with Intel Fortran 12.1, 13.0 and 14.0. as well as gfortran 4.7, 4.8 and 4.9.
+For the above command to succeed, you have to provide [the PML GitLab server](https://gitlab.ecosystem-modelling.pml.ac.uk/profile/keys) with your public SSH key. Alternatively, you can use HTTPS instead of SSH/GIT: replace the above URL (git@...) with https://gitlab.ecosystem-modelling.pml.ac.uk/stable/ERSEM.git.
 
-FABM and ERSEM use a platform-independent build system based on [cmake](http://www.cmake.org). You'll need version 2.8.8 or higher. First check whether you have that installed: execute `cmake --version` on the command line.
+### GOTM
 
-### Mixo model + FABM
-                                  
-!! Include here how to obtain the mixo model code through the FABM repository !!
+Now obtain the latest (developers') version of the GOTM code:
 
-### GOTM + FABM + ERSEM
+    git clone https://github.com/gotm-model/code.git <GOTMDIR>
 
-First obtain the latest (developers') version of the GOTM code from its git repository:
+(Replace `<GOTMDIR>` with the directory where the GOTM code should go, e.g., ~/gotm.)
 
-    git clone https://github.com/gotm-model/code.git gotm-git
+## Building
 
-To build GOTM with FABM support, create a build directory, call cmake to generate makefiles, and make to compile and install. For instance:
+In addition to the source code (see previous section), you will need:
+
+* a Fortran compiler, such as Intel Fortran 12.1 or higher or gfortran 4.7 or higher
+* [cmake](http://www.cmake.org), version 3.0 or higher. First check whether you have that installed: execute `cmake --version` on the command line.
+
+To build the model executable, you will need to create a build directory, call cmake to generate makefiles, then call make to compile and install. For instance:
 
     mkdir -p ~/build/gotm && cd ~/build/gotm
     cmake <GOTMDIR>/src -DFABM_BASE=<FABMDIR> -DFABM_ERSEM_BASE=<ERSEMDIR>
     make install
 
-In the above, replace `<GOTMDIR>` with the directory with the GOTM source code, e.g., ~/gotm-git if you executed `git clone` in you home directory. Also, replace `<FABMDIR>` with the directory with the FABM code, e.g., ~/fabm-git and `<ERSEMDIR>` with the directory with the ERSEM code, e.g., ~/ersem-git.
+In the above, replace `<GOTMDIR>` with the directory with the GOTM source code, e.g., ~/gotm if you executed `git clone` in you home directory. Also, replace `<FABMDIR>` with the directory with the FABM code, e.g., ~/fabm and `<ERSEMDIR>` with the directory with the ERSEM code, e.g., ~/ersem.
 
 Now you should have a GOTM executable with FABM and ERSEM support at `~/local/gotm/bin/gotm`.
 
-### Notes
+## Performing a simulation
 
-It is good practice to keep up to date with the latest code from the ERSEM, FABM and GOTM repositories by regularly executing `git pull` in a directory of each repository.
+Open a terminal window in the current directory (the one that contains this README file), and run `~/local/gotm/bin/gotm`.
 
-If either the ERSEM, FABM or GOTM source codes change (e.g., because changes you made to the code yourself, or after `git pull`), you will need to recompile. This does NOT require rerunning cmake. Instead, you need to return to the build directory and rerun `make install`. For instance `cd ~/build/gotm && make install`.
-
-                                                
-
+The model generates output in [NetCDF format](https://en.wikipedia.org/wiki/NetCDF), which can be read from many programs including Python, R and MATLAB. There is also a variety of viewer applications available, among which [PyNcView](https://github.com/BoldingBruggeman/pyncview).
