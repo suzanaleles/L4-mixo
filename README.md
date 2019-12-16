@@ -31,7 +31,7 @@ For the above command to succeed, you have to provide [the PML GitLab server](ht
 
 Now obtain the latest (developers') version of the GOTM code:
 
-    git clone https://github.com/gotm-model/code.git <GOTMDIR>
+    git clone git@github.com:gotm-model/code.git <GOTMDIR>
 
 (Replace `<GOTMDIR>` with the directory where the GOTM code should go, e.g., ~/gotm.)
 
