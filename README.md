@@ -22,6 +22,8 @@ First [register for access to the ERSEM source code](https://www.pml.ac.uk/Model
 After you receive an e-mail indicating that access to ERSEM was granted, obtain the source code:
 
     git clone git@gitlab.ecosystem-modelling.pml.ac.uk:stable/ersem.git <ERSEMDIR>
+    cd <ERSEMDIR>
+    git checkout faa6a31
 
 (Replace `<ERSEMDIR>` with the directory where the ERSEM code shoulf go, e.g., ~/ersem.)
 
@@ -32,6 +34,8 @@ For the above command to succeed, you have to provide [the PML GitLab server](ht
 Now obtain the latest (developers') version of the GOTM code:
 
     git clone git@github.com:gotm-model/code.git <GOTMDIR>
+    cd <GOTMDIR>
+    git checkout 1cd920
 
 (Replace `<GOTMDIR>` with the directory where the GOTM code should go, e.g., ~/gotm.)
 
