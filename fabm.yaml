@@ -384,7 +384,6 @@ instances:
       POP: R6   
       DOC:   R2       
       RPs:   R6
-      ben: Q6 
   P3:
     long_name: picophytoplankton
     model: su/mixo
@@ -435,7 +434,6 @@ instances:
       POP: R6   
       DOC:   R2       
       RPs:   R6
-      ben: Q6 
   P4:
     long_name: dinodiatoms
     model: su/mixo
@@ -511,7 +509,6 @@ instances:
       POP: R6       
       DOC:   R2     
       RPs:   R6
-      ben: Q6
   Z6:
     long_name: nanozooplankton
     model: su/mixo
@@ -582,7 +579,6 @@ instances:
       POP: R6       
       DOC:   R2       
       RPs:   R6
-      ben: Q6
   Z2:
     long_name: sncms
     model: su/mixo
@@ -666,7 +662,6 @@ instances:
       POP: R6       
       DOC:   R2       
       RPs:   R6
-      ben: Q6
   Z5:
     long_name: microzooplankton
     model: su/mixo
@@ -749,10 +744,9 @@ instances:
       POP: R6       
       DOC:   R2       
       RPs:   R6
-      ben: Q6
   Z4:
     long_name: mesozooplankton
-    model: ersem/mesozooplankton
+    model: su/ersem/mesozooplankton
     check_conservation: false
     parameters:
       q10: 2.0                                            # Q_10 temperature coefficient (-)
