@@ -1,4 +1,4 @@
-# L4 model set up 
+# L4 model set up (https://doi.org/10.5281/zenodo.4297125)
 
 This is a water column model setup designed to explore the dynamics of different protist trophic strategies (autotrophy, mixotrophy, and heterotrophy) at the [L4 station in the Western English Channel](https://westernchannelobservatory.org.uk). The protist model is implemented in the [Framework for Aquatic Biogeochemical Models (FABM)](http://fabm.net) and further depends on the [European Regional Seas Ecosystem Model (ERSEM)](http://ersem.com). The simulation of 1D hydrodynamics and transport is handled by the [General Ocean Turbulence Model (GOTM)](https://gotm.net/).
 
